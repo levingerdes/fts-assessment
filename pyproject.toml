@@ -1,0 +1,45 @@
+[project]
+name = "ft"
+dynamic = ["version"]
+dependencies = [
+    "matplotlib",
+    "numpy",
+    "opencv-python",
+    "pandas",
+    "scikit-learn",
+    "scipy",
+    "seaborn",
+    "torch",
+    "torcheval",
+    "matplotlib-stubs",
+    "pandas-stubs",
+    "scipy-stubs",
+    "pyqt6",
+    "pytest",
+    "pytest-cov",
+]
+requires-python = ">=3.10"
+authors = [{ name = "Levin Gerdes", email = "gerdes@uma.es" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+]
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[tool.pytest.ini_options]
+addopts = ["--doctest-modules", "--cov", "--cov-report", "term-missing"]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+omit = ["tests/*"]
+source = ["ml", "preprocessing"]
