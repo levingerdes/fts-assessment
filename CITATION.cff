@@ -1,11 +1,31 @@
 cff-version: 1.2.0
-message: If you use this software, please cite it as follows.
+message: "If you use this software, please cite it using the 'preferred-citation' metadata."
 authors:
   - family-names: "Gerdes"
     given-names: "Levin"
     orcid: "https://orcid.org/0000-0001-7648-8928"
 title: "FTS Assessment"
 version: 0.0.1
-repository-code: https://github.com/spaceuma/fts-assessment
+repository-code: "https://github.com/spaceuma/fts-assessment"
 date-released: "2024-10-31"
 license: "MIT"
+preferred-citation:
+  authors:
+    - family-names: "Gerdes"
+      given-names: "Levin"
+      orcid: "https://orcid.org/0000-0001-7648-8928"
+    - family-names: "Pérez del Pulgar"
+      given-names: "Carlos"
+      orcid: "https://orcid.org/0000-0001-5819-8310"
+    - family-names: "Castilla Arquillo"
+      given-names: "Raúl"
+      orcid: "https://orcid.org/0000-0003-4203-8069"
+    - family-names: "Azkarate"
+      given-names: "Martin"
+      orcid: "https://orcid.org/0000-0003-3284-5422"
+  title: Field Assessment of Force Torque Sensors for Planetary Rover Navigation
+  doi: "10.48550/arXiv.2411.04700"
+  url: "https://arxiv.org/abs/2411.04700"
+  type: article
+  year: "2024"
+  publisher: "arXiv"

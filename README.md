@@ -8,8 +8,26 @@
 This repository contains the scripts we used to assess force-torque sensor data
 for a paper that is currently under review.
 
-- Author: Levin Gerdes [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0001-7648-8928)
-- Supervisor: Carlos J. Pérez del Pulgar [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0001-5819-8310)
+## Paper
+
+A preprint of the paper is available on
+[arxiv.org](https://arxiv.org/abs/2411.04700):
+
+```bibtex
+@misc{gerdes2024fieldassessmentforcetorque,
+      title={Field Assessment of Force Torque Sensors for Planetary Rover Navigation}, 
+      author={Levin Gerdes and Carlos Pérez del Pulgar and Raúl Castilla Arquillo and Martin Azkarate},
+      year={2024},
+      eprint={2411.04700},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      doi={10.48550/arXiv.2411.04700},
+      url={https://arxiv.org/abs/2411.04700}, 
+}
+```
+
+Both bibtex and formatted text citation can be copied using Github's "Cite this
+Repository" button in the right-hand side toolbar.
 
 ## Dependencies
 
