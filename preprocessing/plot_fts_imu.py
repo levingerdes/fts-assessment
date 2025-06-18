@@ -398,7 +398,9 @@ def main() -> None:
         traverse_directory, t_start_str, t_end_str, t_comment, t_type = traverse
         t_start = int(t_start_str)
         t_end = int(t_end_str)
-        print(f"Traverse {traverse_number}: {(t_end-t_start)//1e9} s, {traverse[3]}")
+        print(
+            f"Traverse {traverse_number}: {(t_end - t_start) // 1e9} s, {traverse[3]}"
+        )
         traverse_dir_abs = os.path.join(baseprod_path, traverse_directory)
 
         plot_wheel_data(

@@ -78,6 +78,24 @@ terrain_example_traverses: TraverseList = [
 ]
 
 labelled_traverses: TraverseList = [
+    ("2023-07-20_18-12-05", "1689869949240820000", "1689869979196410000", 'compressed sand', Terrain.COMPRESSED_SAND.name),
+    ("2023-07-20_18-12-05", "1689870081457050000", "1689870127052580000", 'compressed sand', Terrain.COMPRESSED_SAND.name),
+    ("2023-07-21_17-34-18", "1689953867491410000", "1689953904046950000", 'compressed sand', Terrain.COMPRESSED_SAND.name),
+    ("2023-07-21_17-34-18", "1689954054664820000", "1689954098683840000", 'compressed sand', Terrain.COMPRESSED_SAND.name),
+    ("2023-07-20_18-12-05", "1689870278000020000", "1689870324792390000", 'right side in compressed riverbed with pebbles', Terrain.PEBBLES.name),
+    ("2023-07-20_18-12-05", "1689870617825620000", "1689870675467330000", 'shaky riverbed, mainly right', Terrain.PEBBLES.name),
+    ("2023-07-20_19-12-27", "1689873200913700000", "1689873283070410000", 'loose soil', Terrain.LOOSE_SOIL.name),
+    ("2023-07-21_17-34-18", "1689953714661230000", "1689953790316480000", 'loose soil', Terrain.LOOSE_SOIL.name),
+    ("2023-07-21_12-38-15", "1689936306126180000", "1689936337894780000", 'rock with turn', Terrain.ROCK.name),
+    ("2023-07-21_12-58-11", "1689937232387100000", "1689937258936820000", 'rock straight', Terrain.ROCK.name),
+    ("2023-07-21_14-08-29", "1689943035867130000", "1689943073473720000", 'rock straight', Terrain.ROCK.name),
+    ("2023-07-21_12-58-11", "1689937474564900000", "1689937482721210000", 'rock uphill', Terrain.ROCK.name),
+    ("2023-07-21_12-58-11", "1689937701162690000", "1689937755383280000", 'pebbles downhill', Terrain.PEBBLES.name),
+    ("2023-07-21_12-58-11", "1689939448613310000", "1689939477579240000", 'rock uphill. diagonal.',Terrain.ROCK.name),
+    ("2023-07-21_14-08-29", "1689942160028760000", "1689942184442090000", 'rock uphill. diagonal.',Terrain.ROCK.name),
+]
+
+labelled_traverses_arxiv: TraverseList = [
     ("2023-07-20_18-12-05", "1689869949240817152", "1689869979196407296", 'compressed sand', Terrain.COMPRESSED_SAND.name),
     ("2023-07-20_18-12-05", "1689870061457053952", "1689870147052582912", 'compressed sand', Terrain.COMPRESSED_SAND.name),
     ("2023-07-21_17-34-18", "1689953847491407872", "1689953924046949632", 'compressed sand', Terrain.COMPRESSED_SAND.name),

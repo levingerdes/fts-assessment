@@ -131,7 +131,7 @@ class DataStats:
         print("'Valid' per sensor [%]:")
         for fts in Fts:
             print(fts, (self.num_dict_ok[fts] / self.num_dict_total[fts]) * 100)
-        print(f"Total: {(self.num_ok / self.num_total)*100}")
+        print(f"Total: {(self.num_ok / self.num_total) * 100}")
 
 
 def main() -> None:

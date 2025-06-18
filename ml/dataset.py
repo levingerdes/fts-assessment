@@ -37,15 +37,17 @@ class BaseprodProp(Dataset, Sequence, Sized):
         csv_file: str,
         transform=None,
         training: bool = True,
-        test_split: float = 0.15,
+        test_split: float = 0.25,
         shuffle: bool = True,
+        random_state: None | int = 42,
     ) -> None:
         """
         :param csv_file: Path to the CSV file containing the dataset
         :param transform: Optional transform to be applied on a sample
         :param training: If True, return `training` data, otherwise `test` data
         :param test_split: Fraction of data to use for testing
-        :param shuffle: If True, shuffle the data
+        :param shuffle: If True, shuffle the data compared to the order in the CSV file
+        :param random_state: Random seed for reproducibility when shuffling and to avoid mixing training and test data
         """
         if test_split == 0 and not training:
             raise ValueError("Test data is requested but test_split is 0")
@@ -56,15 +58,26 @@ class BaseprodProp(Dataset, Sequence, Sized):
         self.transform = transform
 
         if shuffle:
-            self.data = self.data.sample(frac=1).reset_index(drop=True)
+            self.data = self.data.sample(frac=1, random_state=random_state).reset_index(
+                drop=True
+            )
 
         if test_split != 0:
             num_samples = len(self.data)
             num_test_samples = int(num_samples * test_split)
+            if num_test_samples <= 0:
+                raise ValueError(
+                    "test_split is too small, resulting in no test samples"
+                )
+            elif num_test_samples >= num_samples:
+                raise ValueError(
+                    "test_split is too large, resulting in no training samples"
+                )
+
             if training:
                 self.data = self.data[:-num_test_samples]
             else:
-                self.data = self.data[-num_test_samples:]
+                self.data = self.data[-num_test_samples - 1 :]
 
     def __len__(self) -> int:
         return len(self.data)

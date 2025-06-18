@@ -2,21 +2,16 @@
 name = "ft"
 dynamic = ["version"]
 dependencies = [
-    "matplotlib",
-    "numpy",
-    "opencv-python",
-    "pandas",
-    "scikit-learn",
-    "scipy",
-    "seaborn",
-    "torch",
-    "torcheval",
-    "matplotlib-stubs",
-    "pandas-stubs",
-    "scipy-stubs",
-    "pyqt6",
-    "pytest",
-    "pytest-cov",
+    "matplotlib>=3.10.1",
+    "numpy>=1.26.4",
+    "opencv-python>=4.11.0.86",
+    "pandas>=2.2.3",
+    "pyqt6>=6.9.0",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.15.2",
+    "seaborn>=0.13.2",
+    "torch>=2.7.0",
+    "torcheval>=0.0.7",
 ]
 requires-python = ">=3.10"
 authors = [{ name = "Levin Gerdes", email = "gerdes@uma.es" }]
@@ -43,3 +38,17 @@ testpaths = ["tests"]
 branch = true
 omit = ["tests/*"]
 source = ["ml", "preprocessing"]
+
+[tool.uv.sources]
+microsoft-python-type-stubs = { git = "https://github.com/microsoft/python-type-stubs.git" }
+
+[dependency-groups]
+dev = [
+    "matplotlib-stubs>=0.2.0",
+    "microsoft-python-type-stubs",
+    "pandas-stubs>=2.2.3.250308",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "ruff==0.11.8",
+    "scipy-stubs>=1.15.2.2",
+]

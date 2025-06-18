@@ -7,6 +7,9 @@
 *.xcf
 *.bkp
 *.pdf
+*.pth
+*.pkl
+*.txt
 
 # Created by https://www.toptal.com/developers/gitignore/api/vim,robotframework,windows,linux,macos,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=vim,robotframework,windows,linux,macos,visualstudiocode

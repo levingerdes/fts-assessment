@@ -25,18 +25,18 @@ __author__ = "Levin Gerdes"
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.types
 
 
 class Model(nn.Module):
-    def init_weights(self, m):
+    def init_weights(self, m) -> None:
         if isinstance(m, nn.Linear):
             torch.nn.init.xavier_uniform_(m.weight)
             m.bias.data.fill_(0.01)
 
-    def __init__(self, input_dim: int) -> None:
+    def __init__(self, input_dim: int, layer_sizes: list[int] = [64, 64]) -> None:
         """
         :param input_dim: Input dimensions, e.g. 6 for one FTS
+        :param layer_sizes: List of FC layer sizes, e.g. [64, 64] for two hidden layers with 64 neurons each
         """
         super(Model, self).__init__()
         num_terrains = 4
@@ -44,22 +44,27 @@ class Model(nn.Module):
         self.flatten = nn.Flatten()
         self.dropout1 = nn.Dropout(0.1)
         self.dropout2 = nn.Dropout(0.2)
-        self.fc1 = nn.Linear(input_dim, 64)
-        self.fcm = nn.Linear(64, 64)
-        self.fc2 = nn.Linear(64, num_terrains)
+        self.fc_first = nn.Linear(input_dim, layer_sizes[0])
+        self.fcs = nn.ModuleList(
+            [
+                nn.Linear(layer_sizes[i], layer_sizes[i + 1])
+                for i in range(len(layer_sizes) - 1)
+            ]
+        )
+        self.fc_last = nn.Linear(layer_sizes[-1], num_terrains)
 
         self.apply(self.init_weights)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.flatten(x)
         x = self.dropout1(x)
-        x = self.fc1(x)
+        x = self.fc_first(x)
         x = F.relu(x)
-        x = self.dropout1(x)
-        x = self.fcm(x)
-        x = F.relu(x)
+        for fc in self.fcs:
+            x = fc(x)
+            x = F.relu(x)
         x = self.dropout2(x)
-        x = self.fc2(x)
+        x = self.fc_last(x)
         output = F.log_softmax(x, dim=-1)
 
         return output

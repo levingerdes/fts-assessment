@@ -57,3 +57,13 @@ class TestDataset(unittest.TestCase):
         for data, label in dataset:
             self.assertTrue(isinstance(data, Tensor))
             self.assertTrue(isinstance(label, Tensor))
+
+    def test_baseprod_shuffle(self) -> None:
+        # Shuffling should change order compared to order in CSV
+        ds1 = BaseprodProp(self.data_path, shuffle=True, random_state=42)
+        ds2 = BaseprodProp(self.data_path, shuffle=False)
+        self.assertNotEqual(ds1.data.values.tolist(), ds2.data.values.tolist())
+
+        # Test reproducibility to avoid mixing training and test data.
+        ds2 = BaseprodProp(self.data_path, shuffle=True, random_state=42)
+        self.assertEqual(ds1.data.values.tolist(), ds2.data.values.tolist())

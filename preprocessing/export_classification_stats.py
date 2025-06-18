@@ -30,6 +30,7 @@ saves the transformed data to CSV files for further use in classification.
 
 __author__ = "Levin Gerdes"
 
+import argparse
 import copy
 import os
 import time
@@ -46,6 +47,34 @@ from sklearn.preprocessing import StandardScaler  # type: ignore
 from . import baseprod_helpers
 from .baseprod_helpers import Terrain, TraverseList
 from .baseprod_helpers import labelled_traverses as traverses
+
+
+def get_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Process BASEPROD FTS and IMU data.")
+    parser.add_argument(
+        "--baseprod_path",
+        type=str,
+        default=baseprod_helpers.data_path,
+        help="Path to the BASEPROD directory",
+    )
+    parser.add_argument(
+        "--rolling_window_sec",
+        type=float,
+        default=0.5,
+        help="Size of the rolling window in seconds",
+    )
+    parser.add_argument(
+        "--fts_names",
+        nargs="*",
+        default=["FL", "FR", "CL", "CR", "BL", "BR"],
+        help="List of FTS sensor names to export",
+    )
+    parser.add_argument(
+        "--only_export",
+        action="store_true",
+        help="If set, only export traverse data without further processing or visualizations",
+    )
+    return parser.parse_args()
 
 
 def count_raw_samples(
@@ -149,7 +178,9 @@ def process_baseprod(
         traverse_directory, t_start_str, t_end_str, t_comment, terrain_type = traverse
         t_start = int(t_start_str)
         t_end = int(t_end_str)
-        print(f"Traverse {traverse_number}: {(t_end-t_start)//1e9} s, {traverse[3]}")
+        print(
+            f"Traverse {traverse_number}: {(t_end - t_start) // 1e9} s, {traverse[3]}"
+        )
         traverse_dir_abs = os.path.join(baseprod_path, traverse_directory)
 
         df_imu = pd.read_csv(os.path.join(traverse_dir_abs, "IMU.csv"))
@@ -266,11 +297,13 @@ def process_baseprod(
             )
 
     # Combine all
-    combined_ft: list[list[float]] = copy.deepcopy(ft_datapoints["FR"])
-    for i, x in enumerate(combined_ft):
-        for fts in ["FL", "CL", "CR", "BL", "BR"]:
-            assert x[0] == ft_datapoints[fts][i][0]
-            x.extend(ft_datapoints[fts][i][1:])
+    fts = fts_names[0]
+    combined_ft: list[list[float]] = copy.deepcopy(ft_datapoints[fts])
+    if len(fts_names) > 1:
+        for i, x in enumerate(combined_ft):
+            for fts in fts_names[1:]:
+                assert x[0] == ft_datapoints[fts][i][0]
+                x.extend(ft_datapoints[fts][i][1:])
     combined_ft_and_imu = copy.deepcopy(combined_ft)
     for i, x in enumerate(combined_ft_and_imu):
         assert x[0] == imu_datapoints["IMU"][i][0]
@@ -313,16 +346,17 @@ def check_for_errors(
 
 
 def main() -> None:
+    args = get_args()
+
     # matplotlib.use("Agg")  # headless plotting
-    baseprod_path: str = baseprod_helpers.data_path
+    baseprod_path: str = args.baseprod_path
     add_lever = True
     cut_to_lever = False
-    rolling_window_sec: float = 1
+    rolling_window_sec: float = args.rolling_window_sec
     rolling_window_ns: int = int(rolling_window_sec * 1e9)
-    process_bardenas = True
-    only_export_traverse_data = False
-
-    fts_names: list[str] = ["FL", "FR", "CL", "CR", "BL", "BR"]
+    process_bardenas: bool = True
+    only_export_traverse_data: bool = args.only_export
+    fts_names: list[str] = args.fts_names
 
     # Collect datapoints to compute PCA, SVD etc
 
@@ -387,6 +421,8 @@ def main() -> None:
 
     data_ft = pd.DataFrame(pca_res_ft, columns=["PCA Component 1", "PCA Component 2"])
     data_ft["Target"] = Y_ft
+
+    plt.figure("PCA of FTSs")
     sns.scatterplot(
         data=data_ft, x="PCA Component 1", y="PCA Component 2", hue="Target"
     )
@@ -407,16 +443,19 @@ def main() -> None:
     data_all = pd.DataFrame(X_all_svd, columns=["SVD Component 1", "SVD Component 2"])
     data_all["Target"] = Y_all
 
+    plt.figure("SVD results for FTSs")
     sns.scatterplot(
         data=data_ft, x="SVD Component 1", y="SVD Component 2", hue="Target"
     )
     plt.show()
 
+    plt.figure("SVD results for IMU")
     sns.scatterplot(
         data=data_imu, x="SVD Component 1", y="SVD Component 2", hue="Target"
     )
     plt.show()
 
+    plt.figure("SVD results for all data")
     sns.scatterplot(
         data=data_all, x="SVD Component 1", y="SVD Component 2", hue="Target"
     )
@@ -459,12 +498,12 @@ def main() -> None:
     tsne_res = tsne.fit_transform(df_ft_scaled)
     # tsne_res = tsne.fit_transform(np.array(X))
     print(
-        "t-SNE done! Time elapsed: {} seconds".format(time.time() - time_start),
+        "t-SNE of FTS done! Time elapsed: {} seconds".format(time.time() - time_start),
         tsne_res.shape,
         tsne_res,
     )
 
-    plt.figure()
+    plt.figure("t-SNE of FTSs")
     sns.scatterplot(
         x=tsne_res[:, 0],
         y=tsne_res[:, 1],
@@ -478,7 +517,7 @@ def main() -> None:
     plt.show()
 
     tsne_res_imu = tsne.fit_transform(df_imu_scaled)
-    plt.figure()
+    plt.figure("t-SNE of IMU")
     sns.scatterplot(
         x=tsne_res_imu[:, 0],
         y=tsne_res_imu[:, 1],
@@ -491,11 +530,10 @@ def main() -> None:
     plt.show()
 
     # 3D
-
     tsne = TSNE(n_components=3, init="random", verbose=1, perplexity=50, n_iter=5000)
     tsne_res = tsne.fit_transform(df_ft_scaled)
 
-    fig = plt.figure()
+    fig = plt.figure("3D t-SNE of FTSs")
     ax: plt.Axes = fig.add_subplot(projection="3d")
     ax.scatter(tsne_res[:, 0], tsne_res[:, 1], tsne_res[:, 2], c=df_ft_scaled["y"])
     plt.show()
