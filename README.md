@@ -1,5 +1,6 @@
 # FTS Assessment
 
+[![arxiv](https://img.shields.io/badge/arXiv-2411.04700-b31b1b.svg)](https://arxiv.org/abs/2411.04700)
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 [![CI-Pytest](https://github.com/spaceuma/fts-assessment/actions/workflows/pytest.yml/badge.svg)](https://github.com/spaceuma/fts-assessment/actions/workflows/pytest.yml)
 [![CI-Ruff](https://github.com/spaceuma/fts-assessment/actions/workflows/ruff.yml/badge.svg)](https://github.com/spaceuma/fts-assessment/actions/workflows/ruff.yml)
