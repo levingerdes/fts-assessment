@@ -5,9 +5,9 @@ authors:
     given-names: "Levin"
     orcid: "https://orcid.org/0000-0001-7648-8928"
 title: "FTS Assessment"
-version: 0.0.1
+version: 0.2.0
 repository-code: "https://github.com/spaceuma/fts-assessment"
-date-released: "2024-10-31"
+date-released: "2025-06-18"
 license: "MIT"
 preferred-citation:
   authors:
@@ -24,8 +24,32 @@ preferred-citation:
       given-names: "Martin"
       orcid: "https://orcid.org/0000-0003-3284-5422"
   title: Field Assessment of Force Torque Sensors for Planetary Rover Navigation
-  doi: "10.48550/arXiv.2411.04700"
-  url: "https://arxiv.org/abs/2411.04700"
+  doi: "10.1007/s10846-025-02324-2"
+  url: "https://doi.org/10.1007/s10846-025-02324-2"
   type: article
-  year: "2024"
-  publisher: "arXiv"
+  year: 2025
+  month: 10
+  volume: 111
+  start: 122
+  issn: "1573-0409"
+  journal: "Journal of Intelligent & Robotic Systems"
+references:
+  - authors:
+      - family-names: "Gerdes"
+        given-names: "Levin"
+        orcid: "https://orcid.org/0000-0001-7648-8928"
+      - family-names: "Pérez del Pulgar"
+        given-names: "Carlos"
+        orcid: "https://orcid.org/0000-0001-5819-8310"
+      - family-names: "Castilla Arquillo"
+        given-names: "Raúl"
+        orcid: "https://orcid.org/0000-0003-4203-8069"
+      - family-names: "Azkarate"
+        given-names: "Martin"
+        orcid: "https://orcid.org/0000-0003-3284-5422"
+    title: Field Assessment of Force Torque Sensors for Planetary Rover Navigation
+    doi: "10.48550/arXiv.2411.04700"
+    url: "https://doi.org/10.48550/arXiv.2411.04700"
+    type: article
+    year: "2024"
+    journal: "arXiv"

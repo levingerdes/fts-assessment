@@ -1,40 +1,27 @@
 # FTS Assessment
 
-[![arxiv](https://img.shields.io/badge/arXiv-2411.04700-b31b1b.svg)](https://arxiv.org/abs/2411.04700)
+[![Paper](https://img.shields.io/badge/Paper-JIRS-blue)](https://doi.org/10.1007/s10846-025-02324-2)
+[![Data](https://img.shields.io/badge/Data-DOI-green)](https://doi.org/10.57780/esa-xxd1ysw)
+[![Citation](https://img.shields.io/badge/Cite-This%20Work-orange)](#citation)
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 [![CI-Pytest](https://github.com/spaceuma/fts-assessment/actions/workflows/pytest.yml/badge.svg)](https://github.com/spaceuma/fts-assessment/actions/workflows/pytest.yml)
 [![CI-Ruff](https://github.com/spaceuma/fts-assessment/actions/workflows/ruff.yml/badge.svg)](https://github.com/spaceuma/fts-assessment/actions/workflows/ruff.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This repository contains the scripts we used to assess force-torque sensor data
-for a paper that is currently under review.
+These scripts were used to prepare the paper ["Field Assessment of Force Torque Sensors for Planetary Rover Navigation"](https://doi.org/10.1007/s10846-025-02324-2).
+The source code is licensed under the [MIT License](LICENSE).
 
-This project is licensed under the MIT License.
+## Links
 
-## Paper
+- Paper (Oct. 2025): <https://doi.org/10.1007/s10846-025-02324-2>
+- Data: <https://doi.org/10.57780/esa-xxd1ysw>
+- Dataset paper: <https://doi.org/10.1038/s41597-024-03881-1>
 
-A preprint of the paper is available at
-[arxiv.org](https://arxiv.org/abs/2411.04700):
+## Reproducibility
 
-```bibtex
-@misc{gerdes2024fieldassessmentforcetorque,
-      title={Field Assessment of Force Torque Sensors for Planetary Rover Navigation}, 
-      author={Levin Gerdes and Carlos Pérez del Pulgar and Raúl Castilla Arquillo and Martin Azkarate},
-      year={2024},
-      eprint={2411.04700},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      doi={10.48550/arXiv.2411.04700},
-      url={https://arxiv.org/abs/2411.04700}, 
-}
-```
-
-The preprint was prepared with version
-[v0.1-preprint](https://github.com/spaceuma/fts-assessment/tree/v0.1-preprint)
-of this code.
-
-Both bibtex and formatted text citation can be copied using Github's "Cite this
-Repository" button in the right-hand side toolbar.
+Results in the [paper](https://doi.org/10.1007/s10846-025-02324-2) were generated using code release [v0.2-revision](https://github.com/spaceuma/fts-assessment/tree/v0.2-revision).
+The [preprint](https://doi.org/10.48550/arXiv.2411.04700) was prepared with code release
+[v0.1-preprint](https://github.com/spaceuma/fts-assessment/tree/v0.1-preprint).
 
 ## Dependencies
 
@@ -111,3 +98,25 @@ python -m ml.train --csv training_data.csv --data_source all
 ```
 
 See all possible arguments by passing `--help`.
+
+## Citation
+
+If you find this work helpful, please cite it as:
+
+Gerdes, L., Pérez del Pulgar, C., Castilla Arquillo, R., Azkarate, M. Field Assessment of Force Torque Sensors for Planetary Rover Navigation. *J Intell Robot Syst* **111**, 122 (2025). <https://doi.org/10.1007/s10846-025-02324-2>
+
+```bibtex
+@article{Gerdes2025FTS,
+  author={Gerdes, Levin and P{\'e}rez del Pulgar, Carlos and Castilla Arquillo, Ra{\'u}l and Azkarate, Martin},
+  title={Field Assessment of Force Torque Sensors for Planetary Rover Navigation},
+  journal={Journal of Intelligent {\&} Robotic Systems},
+  year={2025},
+  month={Oct},
+  day={30},
+  volume={111},
+  number={4},
+  pages={122},
+  doi={10.1007/s10846-025-02324-2},
+  url={https://doi.org/10.1007/s10846-025-02324-2}
+}
+```
